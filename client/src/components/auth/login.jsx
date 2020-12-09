@@ -43,8 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login(props) {
-  console.log(props.history);
+export default function Login({ setAuth, ...props }) {
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
@@ -69,7 +68,9 @@ export default function Login(props) {
       if (response.data.token) {
         localStorage.setItem('user', response.data.token);
       }
-      console.log(localStorage.getItem('user'));
+
+      const condition = localStorage.getItem('user');
+      setAuth(condition);
     } catch (error) {
       console.log(error);
     }

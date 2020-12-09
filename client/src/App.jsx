@@ -1,23 +1,33 @@
 import './App.css';
+import React, { useState } from 'react';
 import Login from './components/auth/login';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import Layout from './components/layout/layout';
 import Aux from './hoc/auxiliary';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 function App() {
-  const isAuth = localStorage.getItem('user') ? true : false;
+  const isAuthCondition = localStorage.getItem('user') ? true : false;
+  const [isAuth, setIsAuth] = useState(isAuthCondition);
+
+  function setAuthorization(condition) {
+    setIsAuth(condition);
+  }
   let routes;
 
   if (isAuth) {
     routes = (
       <Aux>
-        <Route path='/' component={Layout} />
+        <Route path='/' render={(props) => <Layout {...props} />} />
         <Redirect to='/' />
       </Aux>
     );
   } else {
     routes = (
       <Aux>
-        <Route path='/login' component={Login} />
+        <Route
+          path='/login'
+          render={(props) => <Login {...props} setAuth={setAuthorization} />}
+        />
         <Redirect to='/login' />
       </Aux>
     );
