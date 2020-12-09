@@ -13,6 +13,9 @@ const ArticleSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  description: {
+    type: String,
+  },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'categories',
