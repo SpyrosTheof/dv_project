@@ -8,7 +8,6 @@ const users = require('./routes/api/users/user');
 const auth = require('./routes/api/auth/auth');
 
 connectDB();
-
 app.use(
   express.json({
     extended: false,
