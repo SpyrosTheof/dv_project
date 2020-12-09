@@ -14,7 +14,6 @@ const { SERVER_500_ERROR } = require('../../../shared/error_messages');
 router.post(
   '/',
   [
-    check('name', 'Name is required').not().isEmpty(),
     check('email', 'please include a valid email').isEmail(),
     check('password', 'password must have at least 6 characters').isLength({
       min: 6,
@@ -28,7 +27,7 @@ router.post(
       });
     }
 
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
       //See if user exists
@@ -52,7 +51,6 @@ router.post(
       });
 
       user = new User({
-        name,
         email,
         avatar,
         password,
@@ -70,7 +68,6 @@ router.post(
       const payload = {
         user: {
           id: user.id,
-          name: user.name,
         },
       };
 

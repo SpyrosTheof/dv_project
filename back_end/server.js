@@ -6,6 +6,9 @@ const articles = require('./routes/api/articles/article');
 const categories = require('./routes/api/categories/category');
 const users = require('./routes/api/users/user');
 const auth = require('./routes/api/auth/auth');
+var cors = require('cors');
+
+app.use(cors());
 
 connectDB();
 app.use(
